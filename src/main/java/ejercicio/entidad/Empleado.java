@@ -1,10 +1,16 @@
 package ejercicio.entidad;
 
 public class Empleado extends Persona {
-	
-	private int sueldo;
+		
 
-	public int getSueldo() {
+	public Empleado(String nombre, int dni, float sueldo) {
+		super(nombre, dni);
+		this.sueldo = sueldo;
+	}
+
+	private float sueldo;
+
+	public float getSueldo() {
 		return sueldo;
 	}
 

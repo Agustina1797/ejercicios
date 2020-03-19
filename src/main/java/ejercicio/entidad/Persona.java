@@ -10,6 +10,11 @@ public class Persona {
 	
 	//getters setters
 	
+	public Persona( String nombre, int dni) {
+		super();
+		this.dni = dni;
+		this.nombre = nombre;
+	}
 	public int getDni() {
 		return dni;
 	}
@@ -23,7 +28,9 @@ public class Persona {
 		this.nombre = nombre;
 	}
 	
-	
+	public String toString() {
+		return nombre + " " + dni;
+	}
 	
 
 }
