@@ -19,14 +19,14 @@ public class AppAuto {
     	try {
     		auto.acelerar();
     		}catch (ExcesoVelocidadException e) {
-    	System.out.println("No se puede acererar m·s");
-    } break;
+    	System.out.println("No se puede acererar m√°s");
+    } 
     }else {
     	try {
     		auto.frenar();
     	}catch (AutoDetenidoException e) { 
-    		System.out.println("No se puede frenar m·s");
-    	}break;
+    		System.out.println("No se puede frenar m√°s");
+    	}
     }
     System.out.println("1 - ACELERAR       2 - FRENAR      3 - SALIR");
     opc = sc.nextInt();
