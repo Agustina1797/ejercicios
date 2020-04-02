@@ -1,26 +1,30 @@
-package ejercicio.entidad;
+package EjerciciosExcepciones;
 
-public abstract class Persona {
+public class Pasaje {
+
+
 	
-	//atributos
-	
-	protected int dni;
-	protected String nombre;
-	
-	
-	//getters setters
-	
-	public Persona( String nombre, int dni) {
+	public Pasaje(String nombre , int dni) {
 		super();
 		this.dni = dni;
 		this.nombre = nombre;
 	}
+
+
+
+	private int dni;
+	
 	public int getDni() {
 		return dni;
 	}
 	public void setDni(int dni) {
 		this.dni = dni;
 	}
+	
+	
+	
+	private String nombre;
+	
 	public String getNombre() {
 		return nombre;
 	}
@@ -29,13 +33,7 @@ public abstract class Persona {
 	}
 	
 	
-	public abstract float getDescuento(float total);
-	
-	
 	public String toString() {
 		return nombre + " " + dni;
 	}
-	
-	
-
 }
