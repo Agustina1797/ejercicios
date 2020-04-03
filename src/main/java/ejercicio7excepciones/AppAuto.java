@@ -12,6 +12,7 @@ import java.util.Date;
 import java.util.Scanner;
 
 public class AppAuto {
+<<<<<<< HEAD
 	public static void main(String[] args) throws FileNotFoundException {
 
 		Scanner sc = new Scanner(System.in);
@@ -45,6 +46,40 @@ public class AppAuto {
 			System.out.println("1 - ACELERAR       2 - FRENAR      3 - SALIR");
 			opc = sc.nextInt();
 		}
+=======
+	public static void main(String[] args) {
+
+	Scanner sc = new Scanner(System.in);
+	
+	Auto auto = new Auto();
+	int velmax=40;
+	int vel = 0;
+	System.out.println("**** VELOCIDAD ACTUAL: " + auto.getVelocidad() + " ****");
+	System.out.println("1 - ACELERAR       2 - FRENAR      3 - SALIR");
+    int opc = sc.nextInt();
+    
+   while (opc!=3) {
+    if (opc==1) {
+    	try {
+    		auto.acelerar();
+    		}catch (ExcesoVelocidadException e) {
+    	System.out.println("No se puede acererar más");
+    } 
+    }else {
+    	try {
+    		auto.frenar();
+    	}catch (AutoDetenidoException e) { 
+    		System.out.println("No se puede frenar más");
+    	}
+    }
+    System.out.println("1 - ACELERAR       2 - FRENAR      3 - SALIR");
+    opc = sc.nextInt();
+    }
+	
+	}
+	
+	
+>>>>>>> 0607d6b6a0359e92dff3b0184defea4d7b2446ca
 		
 	}
 
