@@ -23,6 +23,17 @@ public class BancoTest extends TestCase {
 		}
 		assertTrue(ca.getSaldo() == 50);
 	}
+	
+	public void testRetiroCAFalla() {
+		CajaAhorro ca = new CajaAhorro("001", 200);
+		try {
+			ca.extraer(300);
+		} catch (SaldoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		assertTrue(ca.getSaldo() == 200);
+	}
 
 	public void testRetiroCC() {
 		CuentaCorriente cc = new CuentaCorriente("002", 100, 100);
@@ -33,6 +44,17 @@ public class BancoTest extends TestCase {
 			e.printStackTrace();
 		}
 
+	}
+	
+	public void testRetiroCCFalla() {
+		CuentaCorriente cc = new CuentaCorriente("002", 400, 100);
+		try {
+			cc.extraer(600);
+		} catch (SaldoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		assertTrue(cc.getSaldo() == 400);
 	}
 
 	public void testDepositarCC() {
