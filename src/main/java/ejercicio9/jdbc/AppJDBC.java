@@ -4,7 +4,11 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+
+import ejercicio9.jdbc.dao.EmployeeDao;
 
 public class AppJDBC {
 
@@ -32,7 +36,7 @@ public class AppJDBC {
 					break;
 					
 				}
-				listar(conection);
+			
 				System.out.println("1 - ALTA     2 - MODIFICACION     3 - BAJA     4 - LISTADO     0 - SALIR");
 				opcion = sc.nextInt();
 			}
@@ -59,13 +63,22 @@ public class AppJDBC {
 
 		Statement stmt = conection.createStatement();
 		ResultSet rs = stmt.executeQuery("select * from employee");
+		List <Emplyee> lista = new ArrayList<Emplyee>();
 		while (rs.next()) {
 			int id = rs.getInt(1);
 			String mail = rs.getString(2);
 			String name = rs.getString(3);
 			String last = rs.getString(4);
-			System.out.println(id + " " + mail + " " + name + " " + last);
+		    
+			Emplyee empleado = new Emplyee();
+			empleado.setId(id);
+			empleado.setMail(mail);
+			empleado.setFirstName(name);
+			empleado.setLastName(last);
+			lista.add(empleado);
 		}
+		
+		EmployeeDao.listar(stmt);
 	}
 	
 	
@@ -85,9 +98,13 @@ public class AppJDBC {
 		System.out.println("Ingrese apellido:");
 		String apellido = sc.next();
 		
-		String insertSql = "update employee set email = '" + email + "' , first_name ='" + nombre + "' ,last_name='" + apellido + "' where id= " + id;
+		Emplyee employee = new Emplyee();
+		employee.setMail(email);
+		employee.setFirstName(nombre);
+		employee.setLastName(apellido);
+		employee.setId(id);
 		
-		stmt.executeUpdate(insertSql);
+		EmployeeDao.modificar(employee , stmt);
 		}
 	}
 	
@@ -96,15 +113,11 @@ public class AppJDBC {
 		Statement stmt = conection.createStatement();
 		System.out.println("Ingrese id a eliminar:");
 		int id = sc.nextInt();
-		Emplyee empleado = buscar(conection, id);
-		if (empleado == null) {
-			
-			System.out.println("No existe el id");
-		} else {
-		String insertSql = "delete from employee where ID=  " + id;
-		stmt.executeUpdate(insertSql);
-		listar(conection);
-		}
+		Emplyee employee = buscar(conection, id);
+		
+		EmployeeDao.baja(employee , stmt);
+		
+		
 	}
 	
 	
