@@ -20,13 +20,10 @@ public class EmployeeDao {
 	}
 
 	public static void baja(Emplyee employee, Statement stmt) throws SQLException {
-		if (employee == null) {
-
-			System.out.println("No existe el id");
-		} else {
-			String insertSql = "delete from employee where ID=  " + employee.getId();
-			stmt.executeUpdate(insertSql);
-		}
+		
+			String deleteSql = "delete from employee where ID=  " + employee.getId();
+			stmt.executeUpdate(deleteSql);
+		
 	}
 
 	public static List<Emplyee> listar(Statement stmt) throws SQLException {

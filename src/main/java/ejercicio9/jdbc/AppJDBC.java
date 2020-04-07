@@ -68,7 +68,12 @@ public class AppJDBC {
 
 		Statement stmt = conection.createStatement();
 
-		EmployeeDao.listar(stmt);
+		List<Emplyee> lista = EmployeeDao.listar(stmt);
+		for (int i = 0; i < lista.size(); i++) {
+			Emplyee listemp = lista.get(i);
+			System.out.println(listemp.getId() + " " + listemp.getFirstName() + " " + listemp.getLastName() + " "
+					+ listemp.getMail());
+		}
 	}
 
 	private static void modificar(Connection conection, Scanner sc) throws SQLException {
@@ -103,7 +108,13 @@ public class AppJDBC {
 		int id = sc.nextInt();
 		Emplyee employee = buscar(conection, id);
 
+		if (employee == null) {
+			System.out.println("No existe el id");
+		} else {
+		
 		EmployeeDao.baja(employee, stmt);
+		
+		}
 
 	}
 
