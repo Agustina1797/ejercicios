@@ -20,9 +20,9 @@ public class AppJDBC {
 			Scanner sc = new Scanner(System.in);
 			int opcion = sc.nextInt();
 			while (opcion != 0) {
-			
-				switch(opcion) {
-				case 1: 
+
+				switch (opcion) {
+				case 1:
 					insertar(conection, sc);
 					break;
 				case 2:
@@ -34,9 +34,9 @@ public class AppJDBC {
 				case 4:
 					listar(conection);
 					break;
-					
+
 				}
-			
+
 				System.out.println("1 - ALTA     2 - MODIFICACION     3 - BAJA     4 - LISTADO     0 - SALIR");
 				opcion = sc.nextInt();
 			}
@@ -55,85 +55,62 @@ public class AppJDBC {
 		String nombre = sc.next();
 		System.out.println("Ingrese apellido:");
 		String apellido = sc.next();
-		String insertSql = "insert into employee (email, `FIRST_NAME` , `LAST_NAME` ) values ('" + email + "',"+ "'" + nombre +"', '" + apellido +"')" ; 
-		stmt.executeUpdate(insertSql );
+
+		Emplyee emp = new Emplyee();
+		emp.setMail(email);
+		emp.setFirstName(nombre);
+		emp.setLastName(apellido);
+		EmployeeDao.insertar(emp, stmt);
+
 	}
 
 	private static void listar(Connection conection) throws SQLException {
 
 		Statement stmt = conection.createStatement();
-		ResultSet rs = stmt.executeQuery("select * from employee");
-		List <Emplyee> lista = new ArrayList<Emplyee>();
-		while (rs.next()) {
-			int id = rs.getInt(1);
-			String mail = rs.getString(2);
-			String name = rs.getString(3);
-			String last = rs.getString(4);
-		    
-			Emplyee empleado = new Emplyee();
-			empleado.setId(id);
-			empleado.setMail(mail);
-			empleado.setFirstName(name);
-			empleado.setLastName(last);
-			lista.add(empleado);
-		}
-		
+
 		EmployeeDao.listar(stmt);
 	}
-	
-	
+
 	private static void modificar(Connection conection, Scanner sc) throws SQLException {
 		Statement stmt = conection.createStatement();
 		System.out.println("Ingrese id a modificar:");
 		int id = sc.nextInt();
 		Emplyee empleado = buscar(conection, id);
 		if (empleado == null) {
-			
+
 			System.out.println("No existe el id");
 		} else {
-		System.out.println("Ingrese email:");
-		String email = sc.next();
-		System.out.println("Ingrese nombre:");
-		String nombre = sc.next();
-		System.out.println("Ingrese apellido:");
-		String apellido = sc.next();
-		
-		Emplyee employee = new Emplyee();
-		employee.setMail(email);
-		employee.setFirstName(nombre);
-		employee.setLastName(apellido);
-		employee.setId(id);
-		
-		EmployeeDao.modificar(employee , stmt);
+			System.out.println("Ingrese email:");
+			String email = sc.next();
+			System.out.println("Ingrese nombre:");
+			String nombre = sc.next();
+			System.out.println("Ingrese apellido:");
+			String apellido = sc.next();
+
+			Emplyee employee = new Emplyee();
+			employee.setMail(email);
+			employee.setFirstName(nombre);
+			employee.setLastName(apellido);
+			employee.setId(id);
+
+			EmployeeDao.modificar(employee, stmt);
 		}
 	}
-	
-	
+
 	private static void baja(Connection conection, Scanner sc) throws SQLException {
 		Statement stmt = conection.createStatement();
 		System.out.println("Ingrese id a eliminar:");
 		int id = sc.nextInt();
 		Emplyee employee = buscar(conection, id);
-		
-		EmployeeDao.baja(employee , stmt);
-		
-		
+
+		EmployeeDao.baja(employee, stmt);
+
 	}
-	
-	
-	private static Emplyee buscar(Connection con, int id ) throws SQLException {
+
+	private static Emplyee buscar(Connection con, int id) throws SQLException {
 		Statement stmt = con.createStatement();
-		ResultSet rs = stmt.executeQuery("select * from employee where ID = " + id);
-			Emplyee emp = null;
-		while (rs.next()) {
-			emp = new Emplyee();
-			emp.setMail(rs.getString(2));
-			emp.setFirstName(rs.getString(3));
-			emp.setLastName(rs.getString(4));
-		}
+		Emplyee emp = EmployeeDao.buscar(stmt, id);
 		return emp;
-		
 	}
-	
-	
+
 }
