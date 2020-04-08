@@ -60,6 +60,7 @@ public class EmployeeDao {
 			emp.setMail(rs.getString(2));
 			emp.setFirstName(rs.getString(3));
 			emp.setLastName(rs.getString(4));
+			emp.setId(id);
 		}
 		return emp;
 
