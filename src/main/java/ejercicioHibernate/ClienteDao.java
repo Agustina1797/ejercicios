@@ -23,7 +23,7 @@ public class ClienteDao {
 	
 	//listar
 
-	public List<ClienteEntity> getAllClientes() {
+	public List<ClienteEntity> getAllCliente() {
 		Session sesn = HibernateUtil.getSessionFactory().openSession();
 		List<ClienteEntity> cliente = new ArrayList<ClienteEntity>();
 		try {

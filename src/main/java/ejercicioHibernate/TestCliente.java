@@ -32,7 +32,7 @@ public class TestCliente {
 		cliborrar.setId(id);
 		clidao.deleteCliente(cliborrar);
 
-		clidao.getAllClientes();
+		clidao.getAllCliente();
 		HibernateUtil.shutdown();
 	}
 
