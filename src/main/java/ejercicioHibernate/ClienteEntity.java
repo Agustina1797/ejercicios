@@ -11,23 +11,22 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "Clientes", uniqueConstraints = {
-		@UniqueConstraint(columnNames = "ID"),
+@Table(name = "Cliente", uniqueConstraints = { @UniqueConstraint(columnNames = "ID"),
 		@UniqueConstraint(columnNames = "EMAIL") })
 
 public class ClienteEntity implements Serializable {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID", unique = true, nullable = false)
 	private Integer Id;
-	
+
 	@Column(name = "EMAIL", unique = true, nullable = false, length = 100)
 	private String email;
-	
+
 	@Column(name = "FIRST_NAME", unique = false, nullable = false, length = 100)
 	private String firstName;
-	
+
 	@Column(name = "LAST_NAME", unique = false, nullable = false, length = 100)
 	private String lastName;
 
